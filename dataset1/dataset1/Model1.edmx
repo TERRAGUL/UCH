@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище MisevModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Colors">
+          <Key>
+            <PropertyRef Name="ID_Color" />
+          </Key>
+          <Property Name="ID_Color" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ColorName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dolzhnocti">
+          <Key>
+            <PropertyRef Name="ID_Dolzhnocti" />
+          </Key>
+          <Property Name="ID_Dolzhnocti" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dolzhnoct" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sotrudniki">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dolzhnosti_ID" Type="int" />
+          <Property Name="Color_id" Type="int" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SurName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="Age" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Misev.dbo.Colors_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Colors_View">
+          <Key>
+            <PropertyRef Name="Номер цвета" />
+            <PropertyRef Name="Название цвета" />
+          </Key>
+          <Property Name="Номер цвета" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название цвета" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Misev.dbo.Dolzhnocti_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Dolzhnocti_View">
+          <Key>
+            <PropertyRef Name="Номер должности" />
+            <PropertyRef Name="Должность" />
+            <PropertyRef Name="Зарплата" />
+          </Key>
+          <Property Name="Номер должности" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Должность" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Зарплата" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Misev.dbo.Sotrudniki_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Sotrudniki_View">
+          <Key>
+            <PropertyRef Name="Номер сотрудника" />
+            <PropertyRef Name="Имя сотрудника" />
+            <PropertyRef Name="Фамилия сотрудника" />
+            <PropertyRef Name="Возраст" />
+          </Key>
+          <Property Name="Номер сотрудника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Номер должности" Type="int" />
+          <Property Name="Номер цвета" Type="int" />
+          <Property Name="Имя сотрудника" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Фамилия сотрудника" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество сотрудника" Type="varchar" MaxLength="50" />
+          <Property Name="Возраст" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Sotrudnik__Color__60A75C0F">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="0..1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ID_Color" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="Color_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sotrudniki__Age__5FB337D6">
+          <End Role="Dolzhnocti" Type="Self.Dolzhnocti" Multiplicity="0..1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolzhnocti">
+              <PropertyRef Name="ID_Dolzhnocti" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="Dolzhnosti_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище MisevModelContainer">
+          <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dolzhnocti" EntityType="Self.Dolzhnocti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Colors_View" EntityType="Self.Colors_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Colors_View].[Номер цвета] AS [Номер цвета], 
+    [Colors_View].[Название цвета] AS [Название цвета]
+    FROM [dbo].[Colors_View] AS [Colors_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Dolzhnocti_View" EntityType="Self.Dolzhnocti_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Dolzhnocti_View].[Номер должности] AS [Номер должности], 
+    [Dolzhnocti_View].[Должность] AS [Должность], 
+    [Dolzhnocti_View].[Зарплата] AS [Зарплата]
+    FROM [dbo].[Dolzhnocti_View] AS [Dolzhnocti_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Sotrudniki_View" EntityType="Self.Sotrudniki_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Sotrudniki_View].[Номер сотрудника] AS [Номер сотрудника], 
+    [Sotrudniki_View].[Номер должности] AS [Номер должности], 
+    [Sotrudniki_View].[Номер цвета] AS [Номер цвета], 
+    [Sotrudniki_View].[Имя сотрудника] AS [Имя сотрудника], 
+    [Sotrudniki_View].[Фамилия сотрудника] AS [Фамилия сотрудника], 
+    [Sotrudniki_View].[Отчество сотрудника] AS [Отчество сотрудника], 
+    [Sotrudniki_View].[Возраст] AS [Возраст]
+    FROM [dbo].[Sotrudniki_View] AS [Sotrudniki_View]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Sotrudnik__Color__60A75C0F" Association="Self.FK__Sotrudnik__Color__60A75C0F">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sotrudniki__Age__5FB337D6" Association="Self.FK__Sotrudniki__Age__5FB337D6">
+            <End Role="Dolzhnocti" EntitySet="Dolzhnocti" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MisevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Colors">
+          <Key>
+            <PropertyRef Name="ID_Color" />
+          </Key>
+          <Property Name="ID_Color" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ColorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Sotrudniki" Relationship="Self.FK__Sotrudnik__Color__60A75C0F" FromRole="Colors" ToRole="Sotrudniki" />
+        </EntityType>
+        <EntityType Name="Dolzhnocti">
+          <Key>
+            <PropertyRef Name="ID_Dolzhnocti" />
+          </Key>
+          <Property Name="ID_Dolzhnocti" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dolzhnoct" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sotrudniki" Relationship="Self.FK__Sotrudniki__Age__5FB337D6" FromRole="Dolzhnocti" ToRole="Sotrudniki" />
+        </EntityType>
+        <EntityType Name="Sotrudniki">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dolzhnosti_ID" Type="Int32" />
+          <Property Name="Color_id" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SurName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Colors" Relationship="Self.FK__Sotrudnik__Color__60A75C0F" FromRole="Sotrudniki" ToRole="Colors" />
+          <NavigationProperty Name="Dolzhnocti" Relationship="Self.FK__Sotrudniki__Age__5FB337D6" FromRole="Sotrudniki" ToRole="Dolzhnocti" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Colors_View">
+          <Key>
+            <PropertyRef Name="Номер_цвета" />
+            <PropertyRef Name="Название_цвета" />
+          </Key>
+          <Property Name="Номер_цвета" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_цвета" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dolzhnocti_View">
+          <Key>
+            <PropertyRef Name="Номер_должности" />
+            <PropertyRef Name="Должность" />
+            <PropertyRef Name="Зарплата" />
+          </Key>
+          <Property Name="Номер_должности" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Должность" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Зарплата" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sotrudniki_View">
+          <Key>
+            <PropertyRef Name="Номер_сотрудника" />
+            <PropertyRef Name="Имя_сотрудника" />
+            <PropertyRef Name="Фамилия_сотрудника" />
+            <PropertyRef Name="Возраст" />
+          </Key>
+          <Property Name="Номер_сотрудника" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Номер_должности" Type="Int32" />
+          <Property Name="Номер_цвета" Type="Int32" />
+          <Property Name="Имя_сотрудника" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Фамилия_сотрудника" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество_сотрудника" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Возраст" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Sotrudnik__Color__60A75C0F">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="0..1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ID_Color" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="Color_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sotrudniki__Age__5FB337D6">
+          <End Role="Dolzhnocti" Type="Self.Dolzhnocti" Multiplicity="0..1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolzhnocti">
+              <PropertyRef Name="ID_Dolzhnocti" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="Dolzhnosti_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MisevEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Colors" EntityType="Self.Colors" />
+          <EntitySet Name="Dolzhnocti" EntityType="Self.Dolzhnocti" />
+          <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Colors_View" EntityType="Self.Colors_View" />
+          <EntitySet Name="Dolzhnocti_View" EntityType="Self.Dolzhnocti_View" />
+          <EntitySet Name="Sotrudniki_View" EntityType="Self.Sotrudniki_View" />
+          <AssociationSet Name="FK__Sotrudnik__Color__60A75C0F" Association="Self.FK__Sotrudnik__Color__60A75C0F">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sotrudniki__Age__5FB337D6" Association="Self.FK__Sotrudniki__Age__5FB337D6">
+            <End Role="Dolzhnocti" EntitySet="Dolzhnocti" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище MisevModelContainer" CdmEntityContainer="MisevEntities">
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="MisevModel.Colors">
+              <MappingFragment StoreEntitySet="Colors">
+                <ScalarProperty Name="ID_Color" ColumnName="ID_Color" />
+                <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dolzhnocti">
+            <EntityTypeMapping TypeName="MisevModel.Dolzhnocti">
+              <MappingFragment StoreEntitySet="Dolzhnocti">
+                <ScalarProperty Name="ID_Dolzhnocti" ColumnName="ID_Dolzhnocti" />
+                <ScalarProperty Name="Dolzhnoct" ColumnName="Dolzhnoct" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sotrudniki">
+            <EntityTypeMapping TypeName="MisevModel.Sotrudniki">
+              <MappingFragment StoreEntitySet="Sotrudniki">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Dolzhnosti_ID" ColumnName="Dolzhnosti_ID" />
+                <ScalarProperty Name="Color_id" ColumnName="Color_id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SurName" ColumnName="SurName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MisevModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colors_View">
+            <EntityTypeMapping TypeName="MisevModel.Colors_View">
+              <MappingFragment StoreEntitySet="Colors_View">
+                <ScalarProperty Name="Номер_цвета" ColumnName="Номер цвета" />
+                <ScalarProperty Name="Название_цвета" ColumnName="Название цвета" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dolzhnocti_View">
+            <EntityTypeMapping TypeName="MisevModel.Dolzhnocti_View">
+              <MappingFragment StoreEntitySet="Dolzhnocti_View">
+                <ScalarProperty Name="Номер_должности" ColumnName="Номер должности" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Зарплата" ColumnName="Зарплата" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sotrudniki_View">
+            <EntityTypeMapping TypeName="MisevModel.Sotrudniki_View">
+              <MappingFragment StoreEntitySet="Sotrudniki_View">
+                <ScalarProperty Name="Номер_сотрудника" ColumnName="Номер сотрудника" />
+                <ScalarProperty Name="Номер_должности" ColumnName="Номер должности" />
+                <ScalarProperty Name="Номер_цвета" ColumnName="Номер цвета" />
+                <ScalarProperty Name="Имя_сотрудника" ColumnName="Имя сотрудника" />
+                <ScalarProperty Name="Фамилия_сотрудника" ColumnName="Фамилия сотрудника" />
+                <ScalarProperty Name="Отчество_сотрудника" ColumnName="Отчество сотрудника" />
+                <ScalarProperty Name="Возраст" ColumnName="Возраст" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

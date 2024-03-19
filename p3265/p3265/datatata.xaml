@@ -1,0 +1,26 @@
+﻿<Window x:Class="p3265.datatata"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:p3265"
+        mc:Ignorable="d"
+        Title="fff" Height="450" Width="800">
+    <Grid>
+        <DataGrid
+            x:Name="Datata"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Идентификатор студента" Binding="{Binding StudentID}"/>
+                <DataGridTextColumn Header="Имя студента" Binding="{Binding Nameee}" />
+                <DataGridTextColumn Header="Возраст студента" Binding="{Binding Age}" />
+                <DataGridTextColumn Header="Предмет" Binding="{Binding Major}" />
+                <DataGridTextColumn Header="Идентификатор курса" Binding="{Binding CourseID}" />
+                <DataGridTextColumn Header="Наименование курса" Binding="{Binding CourseName}" />
+                <DataGridTextColumn Header="Инструктор" Binding="{Binding Instructor}" />
+                <DataGridTextColumn Header="Оценка" Binding="{Binding Credits}" />
+                <DataGridTextColumn Header="Идентификатор студента" Binding="{Binding IDStudent}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MisevModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Colors">
+    <Key>
+      <PropertyRef Name="ID_Color" />
+    </Key>
+    <Property Name="ID_Color" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ColorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Sotrudniki" Relationship="Self.FK__Sotrudnik__Color__60A75C0F" FromRole="Colors" ToRole="Sotrudniki" />
+  </EntityType>
+  <EntityType Name="Dolzhnocti">
+    <Key>
+      <PropertyRef Name="ID_Dolzhnocti" />
+    </Key>
+    <Property Name="ID_Dolzhnocti" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dolzhnoct" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salary" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Sotrudniki" Relationship="Self.FK__Sotrudniki__Age__5FB337D6" FromRole="Dolzhnocti" ToRole="Sotrudniki" />
+  </EntityType>
+  <EntityType Name="Sotrudniki">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dolzhnosti_ID" Type="Int32" />
+    <Property Name="Color_id" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SurName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Colors" Relationship="Self.FK__Sotrudnik__Color__60A75C0F" FromRole="Sotrudniki" ToRole="Colors" />
+    <NavigationProperty Name="Dolzhnocti" Relationship="Self.FK__Sotrudniki__Age__5FB337D6" FromRole="Sotrudniki" ToRole="Dolzhnocti" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Colors_View">
+    <Key>
+      <PropertyRef Name="Номер_цвета" />
+      <PropertyRef Name="Название_цвета" />
+    </Key>
+    <Property Name="Номер_цвета" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Название_цвета" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Dolzhnocti_View">
+    <Key>
+      <PropertyRef Name="Номер_должности" />
+      <PropertyRef Name="Должность" />
+      <PropertyRef Name="Зарплата" />
+    </Key>
+    <Property Name="Номер_должности" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Должность" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Зарплата" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sotrudniki_View">
+    <Key>
+      <PropertyRef Name="Номер_сотрудника" />
+      <PropertyRef Name="Имя_сотрудника" />
+      <PropertyRef Name="Фамилия_сотрудника" />
+      <PropertyRef Name="Возраст" />
+    </Key>
+    <Property Name="Номер_сотрудника" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Номер_должности" Type="Int32" />
+    <Property Name="Номер_цвета" Type="Int32" />
+    <Property Name="Имя_сотрудника" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Фамилия_сотрудника" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Отчество_сотрудника" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Возраст" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Sotrudnik__Color__60A75C0F">
+    <End Role="Colors" Type="Self.Colors" Multiplicity="0..1" />
+    <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colors">
+        <PropertyRef Name="ID_Color" />
+      </Principal>
+      <Dependent Role="Sotrudniki">
+        <PropertyRef Name="Color_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sotrudniki__Age__5FB337D6">
+    <End Role="Dolzhnocti" Type="Self.Dolzhnocti" Multiplicity="0..1" />
+    <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dolzhnocti">
+        <PropertyRef Name="ID_Dolzhnocti" />
+      </Principal>
+      <Dependent Role="Sotrudniki">
+        <PropertyRef Name="Dolzhnosti_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MisevDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Colors" EntityType="Self.Colors" />
+    <EntitySet Name="Dolzhnocti" EntityType="Self.Dolzhnocti" />
+    <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Colors_View" EntityType="Self.Colors_View" />
+    <EntitySet Name="Dolzhnocti_View" EntityType="Self.Dolzhnocti_View" />
+    <EntitySet Name="Sotrudniki_View" EntityType="Self.Sotrudniki_View" />
+    <AssociationSet Name="FK__Sotrudnik__Color__60A75C0F" Association="Self.FK__Sotrudnik__Color__60A75C0F">
+      <End Role="Colors" EntitySet="Colors" />
+      <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sotrudniki__Age__5FB337D6" Association="Self.FK__Sotrudniki__Age__5FB337D6">
+      <End Role="Dolzhnocti" EntitySet="Dolzhnocti" />
+      <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

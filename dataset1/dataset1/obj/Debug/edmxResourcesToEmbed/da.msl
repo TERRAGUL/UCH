@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище MisevModel2Container" CdmEntityContainer="MisevDB">
+    <EntitySetMapping Name="Colors">
+      <EntityTypeMapping TypeName="MisevModel2.Colors">
+        <MappingFragment StoreEntitySet="Colors">
+          <ScalarProperty Name="ID_Color" ColumnName="ID_Color" />
+          <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dolzhnocti">
+      <EntityTypeMapping TypeName="MisevModel2.Dolzhnocti">
+        <MappingFragment StoreEntitySet="Dolzhnocti">
+          <ScalarProperty Name="ID_Dolzhnocti" ColumnName="ID_Dolzhnocti" />
+          <ScalarProperty Name="Dolzhnoct" ColumnName="Dolzhnoct" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sotrudniki">
+      <EntityTypeMapping TypeName="MisevModel2.Sotrudniki">
+        <MappingFragment StoreEntitySet="Sotrudniki">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Dolzhnosti_ID" ColumnName="Dolzhnosti_ID" />
+          <ScalarProperty Name="Color_id" ColumnName="Color_id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="SurName" ColumnName="SurName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="MisevModel2.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Colors_View">
+      <EntityTypeMapping TypeName="MisevModel2.Colors_View">
+        <MappingFragment StoreEntitySet="Colors_View">
+          <ScalarProperty Name="Название_цвета" ColumnName="Название цвета" />
+          <ScalarProperty Name="Номер_цвета" ColumnName="Номер цвета" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dolzhnocti_View">
+      <EntityTypeMapping TypeName="MisevModel2.Dolzhnocti_View">
+        <MappingFragment StoreEntitySet="Dolzhnocti_View">
+          <ScalarProperty Name="Зарплата" ColumnName="Зарплата" />
+          <ScalarProperty Name="Должность" ColumnName="Должность" />
+          <ScalarProperty Name="Номер_должности" ColumnName="Номер должности" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sotrudniki_View">
+      <EntityTypeMapping TypeName="MisevModel2.Sotrudniki_View">
+        <MappingFragment StoreEntitySet="Sotrudniki_View">
+          <ScalarProperty Name="Возраст" ColumnName="Возраст" />
+          <ScalarProperty Name="Отчество_сотрудника" ColumnName="Отчество сотрудника" />
+          <ScalarProperty Name="Фамилия_сотрудника" ColumnName="Фамилия сотрудника" />
+          <ScalarProperty Name="Имя_сотрудника" ColumnName="Имя сотрудника" />
+          <ScalarProperty Name="Номер_цвета" ColumnName="Номер цвета" />
+          <ScalarProperty Name="Номер_должности" ColumnName="Номер должности" />
+          <ScalarProperty Name="Номер_сотрудника" ColumnName="Номер сотрудника" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

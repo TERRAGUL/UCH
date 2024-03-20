@@ -42,6 +42,16 @@ namespace misya1
             ComboBoxTables.ItemsSource = tables;
             ComboBoxTables.SelectedIndex = 2;
             Sotrudnikida.ItemsSource = Sotrudniki.GetData();
+
+            ComboBoxDol.ItemsSource = DolzhnoctiTable.GetData();
+            ComboBoxDol.DisplayMemberPath = "Dolzhnoct";
+            
+            ComboBoxCol.ItemsSource = ColorsTable.GetData();
+            ComboBoxCol.DisplayMemberPath = "ColorName";
+
+            DanyaCbx.ItemsSource = ColorsTable.GetData();
+            DanyaCbx.DisplayMemberPath = "ColorName";
+
         }
 
         private void Sotrudniki_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -91,9 +101,10 @@ namespace misya1
                     break;
 
                 case "Сотрудники":
-                    SotrudnikiTable.InsertQuery(Convert.ToInt32(TextBox1.Text), Convert.ToInt32(TextBox2.Text), TextBox3.Text, TextBox4.Text, TextBox5.Text, Convert.ToInt32(TextBox6.Text));
+                    SotrudnikiTable.InsertQuery(ComboBoxDol.SelectedIndex + 1, ComboBoxCol.SelectedIndex + 1, TextBox1.Text, TextBox2.Text, TextBox3.Text, Convert.ToInt32(TextBox4.Text));
                     Sotrudnikida.ItemsSource = Sotrudniki.GetData();
                     break;
+                    
 
 
             }
@@ -126,8 +137,32 @@ namespace misya1
             }
         }
 
+
         private void izmenit(object sender, RoutedEventArgs e)
         {
+            if (Sotrudnikida.SelectedItem != null) 
+            {
+                string da = ComboBoxTables.Items[ComboBoxTables.SelectedIndex] as string;
+
+                if (da == "Цвета")
+                {               
+                    object id = (Sotrudnikida.SelectedItem as DataRowView).Row[0];
+                    ColorsTable.UpdateQuery(TextBox1.Text, Convert.ToInt32(id));
+                    Sotrudnikida.ItemsSource = Colors.GetData();
+                }
+                else if (da == "Должности")
+                {
+                    object id = (Sotrudnikida.SelectedItem as DataRowView).Row[0];
+                    DolzhnoctiTable.UpdateQuery(TextBox1.Text, Convert.ToInt32(TextBox2.Text), Convert.ToInt32(id));
+                    Sotrudnikida.ItemsSource = Dolzhnocti.GetData();
+                }
+                else if (da == "Сотрудники")
+                {
+                    object id = (Sotrudnikida.SelectedItem as DataRowView).Row[0];
+                    SotrudnikiTable.UpdateQuery(ComboBoxDol.SelectedIndex + 1, ComboBoxCol.SelectedIndex + 1, TextBox1.Text, TextBox2.Text, TextBox3.Text, Convert.ToInt32(TextBox4.Text), Convert.ToInt32(id));
+                    Sotrudnikida.ItemsSource = Sotrudniki.GetData();
+                }
+            }
 
         }
 
@@ -157,6 +192,70 @@ namespace misya1
         }
 
         private void TextBox6_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboBox_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void GoAll(object sender, RoutedEventArgs e)
+        {
+           dataset1.DataSet dataSet = new dataset1.DataSet();
+            dataSet.Show();
+        }
+
+        private void SEARCHALL_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void FOUND(object sender, RoutedEventArgs e)
+        {
+            
+            string da = ComboBoxTables.Items[ComboBoxTables.SelectedIndex] as string;
+
+            if (da == "Цвета")
+            {
+                Sotrudnikida.ItemsSource = ColorsTable.SearchByColor(SEARCHALL.Text);
+            }
+            else if (da == "Должности")
+            {
+                Sotrudnikida.ItemsSource = DolzhnoctiTable.SearchByDolSal(SEARCHALL.Text);
+            }
+            else if (da == "Сотрудники")
+            {
+                Sotrudnikida.ItemsSource = SotrudnikiTable.SearchByFio(SEARCHALL.Text);
+            }
+        }
+
+        private void ComboBox_SelectionChanged_3(object sender, SelectionChangedEventArgs e)
+        {
+            if (DanyaCbx.SelectedItem != null)
+            {
+                var id = (int)(DanyaCbx.SelectedItem as DataRowView).Row[0];
+                Sotrudnikida.ItemsSource = SotrudnikiTable.FilterDataSot(id);
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Sotrudnikida.ItemsSource = Sotrudniki.GetData().ToList();
+            Sotrudnikida.Columns[7].Visibility = Visibility.Hidden;
+            Sotrudnikida.Columns[8].Visibility = Visibility.Hidden;
+            Sotrudnikida.Columns[9].Visibility = Visibility.Hidden;
+            Sotrudnikida.Columns[10].Visibility = Visibility.Hidden;
+            Sotrudnikida.Columns[11].Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
         }

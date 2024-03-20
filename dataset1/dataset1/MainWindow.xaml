@@ -27,8 +27,16 @@
         <TextBox x:Name="TextBox2" Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" Margin="0,30,0,0" TextChanged="TextBox2_TextChanged"/>
         <TextBox x:Name="TextBox3" Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" Margin="0,53,0,0" TextChanged="TextBox3_TextChanged"/>
         <TextBox x:Name="TextBox4" Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" Margin="0,76,0,0" TextChanged="TextBox4_TextChanged"/>
-        <TextBox x:Name="TextBox5" Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" Margin="0,99,0,0" TextChanged="TextBox5_TextChanged"/>
-        <TextBox x:Name="TextBox6" Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" Margin="0,122,0,0" TextChanged="TextBox6_TextChanged"/>
+        <ComboBox x:Name="ComboBoxDol" Grid.Column="2" HorizontalAlignment="Center" Margin="0,99,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionChanged_1"/>
+        <ComboBox x:Name="ComboBoxCol" Grid.Column="2" HorizontalAlignment="Center" Margin="0,126,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionChanged_2"/>
+        <Button Grid.Column="1" Content="Все" HorizontalAlignment="Center" Margin="0,324,0,0" VerticalAlignment="Top" Width="150" Height="31" Click="GoAll"/>
+
+        <Button Click ="FOUND" Grid.Column="2" Content="Найти" FontSize="30" HorizontalAlignment="Center" Margin="0,389,0,0" VerticalAlignment="Top" Width="150" Height="45"/>
+
+        <TextBox x:Name="SEARCHALL" Grid.Column="2" HorizontalAlignment="Center" Margin="0,360,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="31" TextChanged="SEARCHALL_TextChanged" RenderTransformOrigin="0.553,1.679"/>
+
+        <ComboBox x:Name="DanyaCbx" Grid.Column="2" HorizontalAlignment="Center" Margin="0,241,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionChanged_3"/>
+        <Button Grid.Column="2" Content="Очистить" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Width="150" Height="28" Click="Button_Click"/>
 
     </Grid>
 </Window>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace dataset1
     public partial class EF : Window
     {
 
-        private MisevEntities Pizza = new MisevEntities();
+        private MisevDB Pizza = new MisevDB();
         public EF()
         {
             InitializeComponent();
@@ -33,6 +34,17 @@ namespace dataset1
             ComboBoxTables.ItemsSource = tables;
             ComboBoxTables.SelectedIndex = 2;
             Sotrudnikida.ItemsSource = Pizza.Sotrudniki_View.ToList();
+
+
+
+            CbxDol.ItemsSource = Pizza.Dolzhnocti.ToList();
+            CbxDol.DisplayMemberPath = "Dolzhnoct";
+
+            CbxCol.ItemsSource = Pizza.Colors.ToList();
+            CbxCol.DisplayMemberPath = "ColorName";
+
+            DanyaCbx.ItemsSource = Pizza.Colors.ToList();
+            DanyaCbx.DisplayMemberPath = "ColorName";
         }
 
         private void ToDataSet(object sender, RoutedEventArgs e)
@@ -44,7 +56,8 @@ namespace dataset1
 
         private void Sotrudniki_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
+            
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -72,7 +85,7 @@ namespace dataset1
 
         private void izmenit(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void TextBox1_TextChanged(object sender, TextChangedEventArgs e)
@@ -129,12 +142,12 @@ namespace dataset1
             else if (da == "Сотрудники")
             {
                 Sotrudniki sotrudniki = new Sotrudniki();
-                sotrudniki.Dolzhnosti_ID = Convert.ToInt32(TextBox1.Text);
-                sotrudniki.Color_id = Convert.ToInt32(TextBox2.Text);
-                sotrudniki.FirstName = TextBox3.Text;
-                sotrudniki.SurName = TextBox4.Text;
-                sotrudniki.MiddleName = TextBox5.Text;
-                sotrudniki.Age = Convert.ToInt32(TextBox6.Text);
+                sotrudniki.Dolzhnosti_ID = CbxDol.SelectedIndex + 1;
+                sotrudniki.Color_id = CbxCol.SelectedIndex + 1;
+                sotrudniki.FirstName = TextBox1.Text;
+                sotrudniki.SurName = TextBox2.Text;
+                sotrudniki.MiddleName = TextBox3.Text;
+                sotrudniki.Age = Convert.ToInt32(TextBox4.Text);
                 Pizza.Sotrudniki.Add(sotrudniki);
                 Pizza.SaveChanges();
                 Sotrudnikida.ItemsSource = Pizza.Sotrudniki_View.ToList();
@@ -166,6 +179,59 @@ namespace dataset1
                     Sotrudnikida.ItemsSource = Pizza.Sotrudniki_View.ToList();
                 }
             }
+        }
+
+
+        private void SEARCHALL_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void FOUND(object sender, RoutedEventArgs e)
+        {
+
+            string da = ComboBoxTables.Items[ComboBoxTables.SelectedIndex] as string;
+
+            
+
+            if (da == "Цвета")
+            {
+                Sotrudnikida.ItemsSource = Pizza.Colors.ToList().Where(item => item.ColorName.Contains(SEARCHALL.Text));
+                Sotrudnikida.Columns[0].Visibility = Visibility.Hidden;
+            }
+            else if (da == "Должности")
+            {
+                Sotrudnikida.ItemsSource = Pizza.Dolzhnocti.ToList().Where(item => item.Dolzhnoct.Contains(SEARCHALL.Text));
+            }
+            else if (da == "Сотрудники")
+            {
+                Sotrudnikida.ItemsSource = Pizza.Sotrudniki.ToList().Where(item => item.SurName.Contains(SEARCHALL.Text));
+                Sotrudnikida.Columns[0].Visibility = Visibility.Hidden;
+                Sotrudnikida.Columns[1].Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void ComboBox_SelectionChanged_3(object sender, SelectionChangedEventArgs e)
+        {
+            if (DanyaCbx.SelectedItem != null)
+            {
+                var selected = DanyaCbx.SelectedItem as Colors;
+                Sotrudnikida.ItemsSource = Pizza.Sotrudniki.ToList().Where(item => item.Color_id == selected.ID_Color);
+                Sotrudnikida.Columns[0].Visibility = Visibility.Hidden;
+                Sotrudnikida.Columns[1].Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Sotrudnikida.ItemsSource = Pizza.Sotrudniki.ToList();
+            Sotrudnikida.Columns[7].Visibility = Visibility.Hidden;
+            Sotrudnikida.Columns[8].Visibility = Visibility.Hidden;
+        }
+
+        private void CbxDol_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище MisevModel1" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Colors">
+    <Key>
+      <PropertyRef Name="ID_Color" />
+    </Key>
+    <Property Name="ID_Color" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ColorName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dolzhnocti">
+    <Key>
+      <PropertyRef Name="ID_Dolzhnocti" />
+    </Key>
+    <Property Name="ID_Dolzhnocti" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dolzhnoct" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salary" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sotrudniki">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dolzhnosti_ID" Type="int" />
+    <Property Name="Color_id" Type="int" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SurName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+    <Property Name="Age" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Misev.dbo.Colors_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Colors_View">
+    <Key>
+      <PropertyRef Name="ID_Color" />
+      <PropertyRef Name="ColorName" />
+    </Key>
+    <Property Name="ID_Color" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ColorName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Misev.dbo.Dolzhnocti_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Dolzhnocti_View">
+    <Key>
+      <PropertyRef Name="ID_Dolzhnocti" />
+      <PropertyRef Name="Dolzhnoct" />
+      <PropertyRef Name="Salary" />
+    </Key>
+    <Property Name="ID_Dolzhnocti" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dolzhnoct" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salary" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Misev.dbo.Sotrudniki_View" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Sotrudniki_View">
+    <Key>
+      <PropertyRef Name="Number_Sotrudnik" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="SurName" />
+      <PropertyRef Name="Age" />
+    </Key>
+    <Property Name="Number_Sotrudnik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dolzhnosti_ID" Type="int" />
+    <Property Name="Color_id" Type="int" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SurName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+    <Property Name="Age" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Sotrudnik__Color__60A75C0F">
+    <End Role="Colors" Type="Self.Colors" Multiplicity="0..1" />
+    <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colors">
+        <PropertyRef Name="ID_Color" />
+      </Principal>
+      <Dependent Role="Sotrudniki">
+        <PropertyRef Name="Color_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sotrudniki__Age__5FB337D6">
+    <End Role="Dolzhnocti" Type="Self.Dolzhnocti" Multiplicity="0..1" />
+    <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dolzhnocti">
+        <PropertyRef Name="ID_Dolzhnocti" />
+      </Principal>
+      <Dependent Role="Sotrudniki">
+        <PropertyRef Name="Dolzhnosti_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище MisevModel1Container">
+    <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dolzhnocti" EntityType="Self.Dolzhnocti" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Colors_View" EntityType="Self.Colors_View" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Colors_View].[ID_Color] AS [ID_Color], 
+    [Colors_View].[ColorName] AS [ColorName]
+    FROM [dbo].[Colors_View] AS [Colors_View]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Dolzhnocti_View" EntityType="Self.Dolzhnocti_View" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Dolzhnocti_View].[ID_Dolzhnocti] AS [ID_Dolzhnocti], 
+    [Dolzhnocti_View].[Dolzhnoct] AS [Dolzhnoct], 
+    [Dolzhnocti_View].[Salary] AS [Salary]
+    FROM [dbo].[Dolzhnocti_View] AS [Dolzhnocti_View]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Sotrudniki_View" EntityType="Self.Sotrudniki_View" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Sotrudniki_View].[Number_Sotrudnik] AS [Number_Sotrudnik], 
+    [Sotrudniki_View].[Dolzhnosti_ID] AS [Dolzhnosti_ID], 
+    [Sotrudniki_View].[Color_id] AS [Color_id], 
+    [Sotrudniki_View].[FirstName] AS [FirstName], 
+    [Sotrudniki_View].[SurName] AS [SurName], 
+    [Sotrudniki_View].[MiddleName] AS [MiddleName], 
+    [Sotrudniki_View].[Age] AS [Age]
+    FROM [dbo].[Sotrudniki_View] AS [Sotrudniki_View]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Sotrudnik__Color__60A75C0F" Association="Self.FK__Sotrudnik__Color__60A75C0F">
+      <End Role="Colors" EntitySet="Colors" />
+      <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sotrudniki__Age__5FB337D6" Association="Self.FK__Sotrudniki__Age__5FB337D6">
+      <End Role="Dolzhnocti" EntitySet="Dolzhnocti" />
+      <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

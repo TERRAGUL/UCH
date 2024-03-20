@@ -32,5 +32,15 @@ namespace p3265
             Datata.Columns[4].Visibility = Visibility.Collapsed;
             Datata.Columns[8].Visibility = Visibility.Collapsed;
         }
+
+        private void FOUND_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void CLICK(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

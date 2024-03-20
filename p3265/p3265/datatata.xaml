@@ -7,8 +7,20 @@
         mc:Ignorable="d"
         Title="fff" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0,8*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Margin="0,0,185,0" x:Name="FOUND" TextChanged="FOUND_TextChanged"/>
+
+
+        <Button Margin="615,0,0,0"
+                Content="Поиск" FontSize="30" Click ="CLICK"/>
+
         <DataGrid
             x:Name="Datata"
+            Grid.Row="1"
             AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Идентификатор студента" Binding="{Binding StudentID}"/>

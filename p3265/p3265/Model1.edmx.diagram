@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="760439f4e20e43b1a6fde5ff8c6a1052" Name="Diagram1">
         <EntityTypeShape EntityType="p3Model.Courses" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="p3Model.Students" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="p3Model.Students" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="p3Model.FK__Courses__IDStude__3F466844" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
